@@ -39,4 +39,4 @@ This happens **before every LLM call**, giving you full control over:
 
 ---
 
-[[2.-Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[3.-Hooks & Callbacks]] &nbsp;&nbsp; &nbsp; [[4.-Safety & Control]]
+[[Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[Hooks & Callbacks]] &nbsp;&nbsp; &nbsp; [[Safety & Control]]

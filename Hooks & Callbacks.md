@@ -143,4 +143,4 @@ onMessageUpdate: (message) => {
 
 ---
 
-[[1.-Architecture Overview]] &nbsp;&nbsp; &nbsp; [[2.-Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[4.-Safety & Control]]
+[[Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[Safety & Control]]

@@ -92,4 +92,4 @@ turn_end → onAgentEnd → onSteeringEnd
 
 ---
 
-[[1.-Architecture Overview]] &nbsp;&nbsp; &nbsp; [[2.-Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[3.-Hooks & Callbacks]]
+[[Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[Hooks & Callbacks]]

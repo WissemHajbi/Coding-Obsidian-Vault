@@ -6,25 +6,29 @@
 
 ## 📖 Table of Contents
 
-- [[1.-Architecture Overview]] — Core concepts and lifecycle
-- [[2.-Event Flow Diagram]] — Execution flow and debugging
-- [[3.-Hooks & Callbacks]] — Hooks implementation examples
-- [[4.-Quick Start]] — Get started quickly
-- [[5.-Examples]] — Real usage examples
-- [[6.-API Reference]] — Complete API docs
-- [[7.-Migration Guide]] — Version compatibility
+### Pi-AI (LLM Abstraction Layer)
+- [[Pi-AI Package]] — Unified LLM API reference
+- [[Streaming & Event System]] — Real-time response events
+- [[Tool Calling & Providers]] — Tool definitions and execution
+- [[Pi-AI Coding Patterns]] — Common patterns and best practices
+
+### Agent Framework (Built on Pi-AI)
+- [[Architecture Overview]] — Core agent concepts and lifecycle
+- [[Event Flow Diagram]] — Agent execution flow
+- [[Hooks & Callbacks]] — Agent hooks implementation
+- [[Example Code]] — Agent usage examples
 
 ---
 
 ## 🚀 Quick Links
 
-| Goal | Link |
-|------|------|
-| **Start Building** | [[4.-Quick Start]] |
-| **Understand Flow** | [[2.-Event Flow Diagram]] |
-| **Use Hooks** | [[3.-Hooks & Callbacks]] |
-| **View API** | [[6.-API Reference]] |
-| **Read Examples** | [[5.-Examples]] |
+| Goal                     | Link                         |
+| ------------------------ | ---------------------------- |
+| **Learn LLM API**        | [[Pi-AI Package]]            |
+| **Understand Streaming** | [[Streaming & Event System]] |
+| **Use Tools**            | [[Tool Calling & Providers]] |
+| **Learn Agents**         | [[Architecture Overview]]    |
+| **See Examples**         | [[Example Code]]             |
 
 ---
 
@@ -41,7 +45,7 @@
 
 ## 📚 Detailed Topics
 
-### [[1.-Architecture Overview]]
+### [[Architecture Overview]]
 
 The core architecture and how AI HARNESS works.
 
@@ -68,7 +72,7 @@ The core architecture and how AI HARNESS works.
 - `onAgentEnd`
 - `start`, `end`, `before`, `after`
 
-### [[2.-Event Flow Diagram]]
+### [[Event Flow Diagram]]
 
 Visual representation of execution flow.
 
@@ -93,7 +97,7 @@ Error → Error Collection → Error Message
      → Optional Retry → Final Response
 ```
 
-### [[3.-Hooks & Callbacks]]
+### [[Hooks & Callbacks]]
 
 Implementing hooks for custom behavior.
 
@@ -115,7 +119,7 @@ Implementing hooks for custom behavior.
 - `message_end` — When message completes
 - `toolExecution` — Tool completion result
 
-### [[4.-Quick Start]]
+### Quick Start
 
 Get started with minimal code.
 
@@ -149,7 +153,7 @@ advancedAgent.systemMessages = [
 ];
 ```
 
-### [[5.-Examples]]
+### [[Example Code]]
 
 Real usage examples for common patterns.
 
@@ -165,65 +169,25 @@ Real usage examples for common patterns.
 **Context Management:**
 - Smart pruning and message history management
 
-### [[6.-API Reference]]
-
-Complete API documentation.
-
-**Core Functions:**
-- `agent()` — Create a new agent
-- `agentWithTools()` — Create agent with tools
-- `abortAgent()` — Signal abort without stopping
-- `abortRun()` — Stop entire agent run
-
-**Config Options:**
-- `llm` — LLM configuration
-- `config` — General config (maxTokens, temperature, etc.)
-- `hooks` — Available hook callbacks
-- `systemMessages` — Persistent system instructions
-
 **Types:**
 - `Agent` — Agent interface
 - `Hook` — Hook callback signature
 - `Tool` — Tool interface
 - `Message` — Message object
 
-### [[7.-Migration Guide]]
-
-How to upgrade from other libraries.
-
-**From Other Libraries:**
-- Map your hooks to AI HARNESS hooks
-- Adapt your config to new format
-- Update error handling patterns
-- Modify context management
-
-**Version Compatibility:**
-- v1 → v2 — Breaking changes, migration needed
-- Features added: Tool integration, improved hooks
-
 ---
+## 🔖 All Topics
 
-## 🔖 Related Documentation
+### Pi-AI (Foundation Layer)
+- [[Pi-AI Package]] — API reference & types
+- [[Streaming & Event System]] — Real-time events
+- [[Tool Calling & Providers]] — Tools & 20+ providers
+- [[Pi-AI Coding Patterns]] — 12 coding patterns
+- [[Pi-AI Study Summary]] — Complete study guide ← **Start here**
 
-- [[Architecture Overview]] — Core concepts
-- [[Event Flow Diagram]] — Execution flow
-- [[Hooks & Callbacks]] — Hook implementations
-- [[Quick Start]] — Get started
-- [[Examples]] — Usage examples
-- [[API Reference]] — Full API docs
-- [[Migration Guide]] — Version compatibility
-- [[Support]] — Help and FAQ
+### Agent Framework (Built on Pi-AI)
+- [[Architecture Overview]] — Agent concepts & lifecycle
+- [[Event Flow Diagram]] — Agent execution flow
+- [[Hooks & Callbacks]] — Agent hooks implementation
 
----
 
-## 📢 Notes
-
-- This is the **latest documentation**
-- Features are actively being added
-- Check the migration guide for version updates
-- Report issues on the project repository
-
----
-
-[[1.-Architecture Overview]] &nbsp;&nbsp; &nbsp; [[2.-Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[3.-Hooks & Callbacks]] &nbsp;&nbsp; &nbsp; [[4.-Quick Start]] &nbsp;&nbsp; &nbsp; [[5.-Examples]]
-[[6.-API Reference]] &nbsp;&nbsp; &nbsp; [[7.-Migration Guide]]

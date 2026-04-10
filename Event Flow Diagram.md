@@ -81,4 +81,4 @@ collectMessages() → messages: Array
 
 ---
 
-[[1.-Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Agent Hooks & Callbacks]] &nbsp;&nbsp; &nbsp; [[3.-Hooks & Callbacks]]
+[[Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Hooks & Callbacks]]
