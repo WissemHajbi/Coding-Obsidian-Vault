@@ -1,0 +1,109 @@
+# Safety & Control Layer
+
+Multiple control points protect agents from dangerous behavior.
+
+---
+
+## Blocking Hooks
+
+### `beforeToolCall`
+
+**Purpose:** Prevent dangerous operations.
+
+```typescript
+beforeToolCall: (definition) => {
+    const blockedTools = ['bash', 'write', 'delete'];
+    if (blockedTools.includes(definition.name)) {
+        console.log(`Blocked tool: ${definition.name}`);
+        return false;
+    }
+    return true;
+}
+```
+
+### `afterToolCall`
+
+**Purpose:** Log/sanitize tool results.
+
+```typescript
+afterToolCall: (result) => {
+    result = JSON.parse(JSON.stringify(result));  // Deep clone
+    console.log(`Tool result: ${result}`);
+    return result;
+}
+```
+
+---
+
+## Signal Control
+
+### AbortAgent
+
+```typescript
+// Stop streaming (but resume later)
+abortAgent();
+
+// Abort entire run
+abortRun();
+```
+
+---
+
+## Message Management
+
+### `transformContext`
+
+**Purpose:** Control conversation length.
+
+```typescript
+transformContext: (messages) => {
+    if (messages.length > 20) {
+        return messages.slice(-20);  // Keep last 20
+    }
+    return messages;
+}
+```
+
+### `collectMessages`
+
+**Purpose:** Filter which messages to send to LLM.
+
+```typescript
+collectMessages: () => {
+    return window.app.messages;  // Your app messages
+}
+```
+
+---
+
+## Event System
+
+```
+message_start → collectMessages
+    ↓
+convertToLlm
+    ↓
+LLM streaming → onMessageUpdate
+    ↓
+transformContext
+    ↓
+Tool execution → beforeToolCall/afterToolCall
+    ↓
+nextMessage → repeat
+    ↓
+agent_end → onAgentEnd/onSteeringEnd
+```
+
+---
+
+### Best Practices
+
+⚠ **Always deep clone tool results** before modifying
+
+⚠ **Log all blocking decisions** for debugging
+
+⚠ **Use signals** for user-initiated cancellation
+
+---
+
+[[Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[Hooks & Callbacks]]

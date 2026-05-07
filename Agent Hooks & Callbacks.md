@@ -1,4 +1,4 @@
-This note documents the runtime hooks and callbacks the Agent loop expects. Use this with [[agent-types-summary]].
+This note documents the runtime hooks and callbacks the Agent loop expects. Use this with [[Agent Types]].
 
 - convertToLlm(messages)
   - Purpose: transform app-level AgentMessage[] into provider-compatible LLM Message[] (filter UI-only messages, flatten attachments, format content).
@@ -52,6 +52,3 @@ This note documents the runtime hooks and callbacks the Agent loop expects. Use 
 Tips
 - Keep convertToLlm and transformContext deterministic and fast — they run before each LLM call.
 - Use beforeToolCall to enforce safety checks. Do not perform long-running side effects here.
-- Use onUpdate in tool execute() to stream partial results back to the agent and UIs.
-
-See [[Agent Runtime Flow]] for how hooks fit into the event sequence.

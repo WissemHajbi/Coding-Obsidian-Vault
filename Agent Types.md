@@ -1,36 +1,95 @@
-This note lists core data types used by the Agent runtime. Hooks and callbacks are documented in [[Agent Hooks & Callbacks]].
+# Agent Types Overview
 
-- AgentMessage
-  - Basic transcript unit. Common roles: `user`, `assistant`, `toolResult`.
-  - Messages may contain content blocks, attachments, timestamps, and custom fields via declaration merging.
+> [!NOTE] Quick Reference
+> Agents differ in structure and behavior. Choose the right type for your app.
 
-- AgentEvent (common ones)
-  - agent_start / agent_end
-  - turn_start / turn_end
-  - message_start / message_update / message_end
-  - tool_execution_start / tool_execution_update / tool_execution_end
-  - Events include metadata (timestamps, message ids, deltas for streaming).
+---
 
-- AgentTool (shape)
-  - name: string
-  - label?: string
-  - description?: string
-  - parameters: Type.Object(...) // TypeBox schema
-  - execute(toolCallId: string, params: any, signal: AbortSignal, onUpdate?: (update)=>void): Promise<{content, details}>
-  - execute should throw on failure; return content blocks and optional details on success.
+## Basic Agents
 
-- AgentToolCall / ToolResult
-  - Tool calls appear as structured toolCall objects; results are inserted back as `toolResult` messages consumed by the LLM.
+### 1. `agent`
 
-- AgentState (summary)
-  - systemPrompt, model, thinkingLevel, tools, messages, isStreaming, streamingMessage?, pendingToolCalls, errorMessage?
+**Purpose:** Run LLM requests and stream results.
 
-- AgentLoopConfig (overview)
-  - convertToLlm(messages): AgentMessage[] → LLM Message[]
-  - transformContext(messages, signal): optional pruning/compaction
-  - Other runtime hooks are in [[Agent Hooks & Callbacks]]
+**Lifecycle:**
 
-Why read this
+```
+User input → collectMessages → convertToLlm
+    ↓
+convertToLlm → LLM streaming → collectMessages → ...
+    ↓
+LLM streaming → transformContext → nextMessage
+```
 
-- Types define contracts across packages (agent, ai, coding-agent, web-ui).
-- When building tools or UIs, implement shapes compatible with these types.
+**Key events:**
+- `message_start`
+- `message_update`
+- `message_end`
+- `turn_end`
+
+**Use case:** Simple chat apps, basic assistants.
+
+---
+
+### 2. `agentWithTools`
+
+**Purpose:** Execute tools during streaming.
+
+**Additional behavior:**
+
+```
+Basic agent flow + executeTool + Stream tool results
+```
+
+**Key events:**
+- All basic agent events
+- `tool_call_complete`
+- `toolExecution_*`
+
+**Use case:** Apps that need to run external tools/functions.
+
+---
+
+### 3. `agentWithSystemPrompt`
+
+**Purpose:** System prompt managed by harness.
+
+**Key change:**
+
+- System prompt is stored in `messages.systemMessages`
+- Harness injects into LLM context automatically
+- Changes only take effect at next agent start
+
+**Use case:** Multi-turn conversations with consistent system instructions.
+
+---
+
+## Advanced Agent
+
+### 4. `agentFlow` (Basic + Advanced)
+
+**Purpose:** Combine all features with enhanced control.
+
+**Features:**
+- All basic/advanced agent features
+- Tool execution with streaming
+- Enhanced system prompt management
+- Full lifecycle control
+
+**Lifecycle:**
+
+```
+start → collectMessages → convertToLlm
+    ↓
+LLM streaming → collectMessages / transformContext
+    ↓
+executeTool (if tools) → Stream results → collectMessages
+    ↓
+turn_end → onAgentEnd → onSteeringEnd
+```
+
+**Use case:** Full-featured apps needing maximum control.
+
+---
+
+[[Architecture Overview]] &nbsp;&nbsp; &nbsp; [[Event Flow Diagram]] &nbsp;&nbsp; &nbsp; [[Hooks & Callbacks]]
